@@ -1,0 +1,24 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.form{
+  min-height: 100vh;
+  background-color: #13253d;
+  color: #fff;
+}
+.formHeader{
+  text-align: center;
+  font-size: 68px;
+}
+form{
+  text-align: center;
+}
+.wypel{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  text-align: center;
+}

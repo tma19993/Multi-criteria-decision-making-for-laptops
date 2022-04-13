@@ -1,0 +1,55 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+section{
+  color: #031630;
+}
+.StartBGC{
+  width: 100%;
+  min-height: 100vh;
+  background: url("../pictures/computer.jpg") no-repeat fixed center; 
+
+}
+
+.welcome{
+  position: absolute;
+  top: 38%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  text-align: center;
+ 
+  
+}
+.welcome h1{
+  font-size: 82px;
+  text-transform: uppercase;
+
+}
+.welcome p{
+  font-size: 38px;
+}
+
+a.start{
+  display: block;
+  position: absolute;
+  top: 58%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+ font-size: 38px;
+  color: #e1d687;
+  text-decoration: none;
+  text-transform: uppercase;
+  background-color: #031630;
+  padding: 30px 60px;
+  border: none;
+  border-radius: 50px;
+  transition: .3s;
+  cursor: pointer;
+}
+a.start:hover{
+  background-color:#e1d687;
+  color: #031630 ;
+}
