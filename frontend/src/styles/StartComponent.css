@@ -12,7 +12,12 @@ section{
   background: url("../pictures/computer.jpg") no-repeat fixed center; 
 
 }
-
+.logo{
+  position:absolute;
+  top: 8%;
+  left: 15%;
+  transform: translate(-50%,-50%);
+}
 .welcome{
   position: absolute;
   top: 38%;
@@ -35,7 +40,7 @@ section{
 a.start{
   display: block;
   position: absolute;
-  top: 58%;
+  top: 65%;
   left: 50%;
   transform: translate(-50%,-50%);
  font-size: 38px;
