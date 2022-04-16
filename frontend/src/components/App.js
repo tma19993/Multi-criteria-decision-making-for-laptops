@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
+
+import Details from "./resultComponents/details";
 import Form from "./form";
 import StartComponent from "./StartComponent";
 import ResultBar from "./resultComponents/resultBar";
@@ -34,7 +36,7 @@ class App extends Component {
           {laptop.Manufacturer} {laptop.Model_Name}
         </span>
         <ResultBar result={laptop.sawResult} />
-        <span className="details">det</span>
+        <Details />
       </div>
     ));
     // console.log(this.state.array);
