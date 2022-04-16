@@ -6,8 +6,6 @@ const bodyParser = require("body-parser");
 
 const port = 5000;
 
-//potrzeba zrobić 2 foreach'e ponieważ nie znajdziemy wartości
-
 let cpuRatio = 0.3;
 let gpuRatio = 0.25;
 let ramRatio = 0.2;
@@ -40,17 +38,65 @@ app.use(
     extended: true,
   })
 );
-
 app.use(bodyParser.json());
+
+MongoClient.connect("mongodb://localhost:27017", (error, laptops) => {
+  if (error) {
+    console.log("Błąd połączenia z bazą danych");
+    laptops.close();
+  } else {
+    let manufacturerList = [];
+    let categoryList = [];
+    let screenSizeList = [];
+    let operationSystemList = [];
+    const database = laptops.db("Dane");
+    const lap = database.collection("laptops");
+    lap.find({}).toArray((err, laptopsData) => {
+      if (err) {
+        console.log("Błąd zapytania: " + err);
+      } else {
+        laptopsData.filter((laptop) => {
+          manufacturerList.push(laptop.Manufacturer);
+          categoryList.push(laptop.Category);
+          screenSizeList.push(laptop.Screen_Size);
+          operationSystemList.push(laptop.Operating_System);
+        });
+        manufacturerList = manufacturerList.filter(
+          (manufacturer, index, array) => array.indexOf(manufacturer) === index
+        );
+        // console.log(manufacturerList);
+        categoryList = categoryList.filter(
+          (category, index, array) => array.indexOf(category) === index
+        );
+        screenSizeList = screenSizeList.filter(
+          (screenSize, index, array) => array.indexOf(screenSize) === index
+        );
+        operationSystemList = operationSystemList.filter(
+          (operationSystem, index, array) =>
+            array.indexOf(operationSystem) === index
+        );
+        laptops.close();
+        const List = {
+          manufacturerList,
+          categoryList,
+          screenSizeList,
+          operationSystemList,
+        };
+        app.get("/FilterForm", (req, res) => res.send(List));
+      }
+    });
+  }
+});
+
 app.post("/GetRatio", (req, res) => {
   cpuRatio = req.body.cpu;
   gpuRatio = req.body.gpu;
   ramRatio = req.body.ram;
   storageRatio = req.body.storage;
   price_ratio = req.body.price;
-  // screen_ratio = req.body.screen,
-  //  weigthRatio = req.body.weigth,
-  console.log(req.body);
+
+  // console.log(req.body);
+
   // połączenie z bazą
   MongoClient.connect("mongodb://localhost:27017", (error, laptops) => {
     if (error) {
@@ -60,18 +106,17 @@ app.post("/GetRatio", (req, res) => {
       // console.log("Jesteś połączony z bazą danych".green);
       // console.log("Za 5 sekund uruchomi się aplikacja".red);
       console.log("Aktualizacja rankingu".green);
-
       const database = laptops.db("Dane");
       const lap = database.collection("laptops");
+
       lap.find({}).toArray((err, laptopsData) => {
         if (err) {
           console.log("Błąd zapytania".bold.red);
         } else {
           // console.log("Zapytanie zostało przyjęte");
+
           laptopsDatabase = laptopsData;
-
           let finialArray = [];
-
           let maxCpu = 0;
           let maxGpu = 0;
           let maxStorage = 0;
@@ -155,6 +200,15 @@ app.post("/GetRatio", (req, res) => {
           globalArray = finialArray;
           //zakończenie połączenia
           laptops.close();
+          //Dodanie wyniku SAW do tablicy
+          globalArray.forEach((laptop) => {
+            ratigArray.forEach((result) => {
+              if (result._id === laptop._id) {
+                laptop.sawResult = result.result;
+              }
+            });
+          });
+          // console.log(ratigArray);
           //koniec else
         }
 
@@ -165,16 +219,6 @@ app.post("/GetRatio", (req, res) => {
   });
 });
 
-globalArray.forEach((laptop) => {
-  ratigArray.forEach((result) => {
-    if (result._id === laptop._id) {
-      laptop.sawResult = result.result;
-    }
-  });
-});
-// console.log(globalArray);
-
-app.get("/", (req, res) => res.send("Hello world"));
 app.get("/GlobalArray", (req, res) => res.send(globalArray));
 //komunikaty na końcu
 app.listen(port, () => {
