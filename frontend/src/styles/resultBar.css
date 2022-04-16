@@ -1,0 +1,15 @@
+.backroundResultBar {
+  height: 30px;
+  width: 90%;
+  margin: 0 auto;
+  background-color: #031630;
+  display: flex;
+  align-items: center;
+}
+
+.backroundResultBar section {
+  background-color: #fff;
+  width: 95%;
+  margin: 0 auto;
+  height: 40%;
+}

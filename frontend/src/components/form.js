@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import FilterForm from "./FilterForm";
 import "../styles/form.css";
 class Form extends Component {
   state = {
@@ -8,8 +9,10 @@ class Form extends Component {
     ram: 0,
     storage: 0,
     price: 0,
-    // screen:0,
-    // weigth:0,
+  };
+  connectionProps = () => {
+    this.props.formUpdate();
+    this.props.activeResult();
   };
   handleEvent = (e) => {
     this.setState({
@@ -18,7 +21,6 @@ class Form extends Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-
     const { cpu, gpu, ram, storage, price } = this.state;
     const frontRatio = {
       cpu: cpu / 100,
@@ -27,7 +29,6 @@ class Form extends Component {
       storage: storage / 100,
       price: price / 100,
     };
-    console.log(frontRatio.cpu);
     axios
       .post("http://localhost:5000/GetRatio", frontRatio)
       .then((response) => {
@@ -43,6 +44,8 @@ class Form extends Component {
     return (
       <section className="form" id="formId">
         <h2 className="formHeader">Formularz</h2>
+        <FilterForm />
+
         <form
           onSubmit={this.handleSubmit}
           action="http://localhost:5000/GetRatio"
@@ -163,10 +166,11 @@ class Form extends Component {
               onChange={(e) => this.handleEvent(e)}
             />
           </div>
-          <button type="submit" name="button" onClick={this.props.formUpdate}>
+          <button type="submit" name="button" onClick={this.connectionProps}>
             Wyślij
           </button>
         </form>
+
         <a href="#StartSide">Wróć do strony startowej</a>
       </section>
     );

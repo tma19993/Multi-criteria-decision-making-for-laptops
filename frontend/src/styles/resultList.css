@@ -1,0 +1,36 @@
+.resultBar {
+  background-color: #c0bd8d;
+  width: 70%;
+  margin: 10% auto 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 2fr 5fr 2fr;
+  grid-template-rows: 1fr;
+}
+
+.resultBar p {
+  text-align: center;
+  font-size: 22px;
+  padding: 30px 0;
+  text-transform: uppercase;
+}
+
+
+.resultList {
+  width: 70%;
+  margin: 0 auto;
+  list-style: none;
+
+
+}
+
+.resultList div {
+  background-color: #fff;
+  padding: 40px 0;
+  display: grid;
+  grid-template-columns: 1fr 2fr 5fr 2fr;
+  grid-template-rows: 1fr;
+  margin: 40px 0;
+  font-size: 18px;
+  text-align: center;
+}
+

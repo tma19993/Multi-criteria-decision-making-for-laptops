@@ -1,42 +1,38 @@
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
-  /* Firefox */
-  * {
-    scrollbar-width: auto;
-    scrollbar-color: #c0bd8d transparent;
-  }
+/* Firefox */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #c0bd8d transparent;
+}
 
 
-  *::-webkit-scrollbar {
-    width: 16px;
-  }
+*::-webkit-scrollbar {
+  width: 16px;
+}
 
-  *::-webkit-scrollbar-track {
-    background: transparent;
-  }
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
 
-  *::-webkit-scrollbar-thumb {
-    background-color: #c0bd8d;
-    border-radius: 10px;
+*::-webkit-scrollbar-thumb {
+  background-color: #c0bd8d;
+  border-radius: 10px;
 
-  }
+}
 
 
 html {
   overflow: overlay;
   scroll-behavior: smooth;
+  background-color: #031630;
 
 }
 
-li{
-  list-style: none;
-  border-bottom: 2px solid black;
-}
-.miejsca{
-  padding-left: 20px;
-font-size: 20px;
+.App {
+  color: #031630;
 }
