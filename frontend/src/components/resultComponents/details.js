@@ -1,19 +1,19 @@
-import React, { Component } from "react";
-class Details extends Component {
-  state = {
-    active: false,
-  };
-  handleActive = () => {
-    this.setState({
-      active: !this.state.active,
-    });
-  };
-  render() {
+import React from "react";
+import "../../styles/details.css";
+const Details = (props) => {
+  console.log(props.changeActive);
+  if (props.active) {
     return (
       <>
-        <button onClick={this.handleActive}>Szczegóły</button>
+        <div className="detailsBGC"></div>
+        <div className="details">
+          <button onClick={props.changeActive}>Wyjdź</button>
+        </div>
       </>
     );
+  } else {
+    return null;
   }
-}
+};
+
 export default Details;
