@@ -36,3 +36,17 @@ html {
 .App {
   color: #031630;
 }
+
+.detailButton {
+  margin: 0 auto;
+  /* padding: 20px 30px; */
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: .1s;
+}
+
+.detailButton:hover {
+  color: #c0bd8d;
+}

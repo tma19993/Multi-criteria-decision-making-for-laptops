@@ -1,15 +1,18 @@
 import React, { Component } from "react";
 import axios from "axios";
+
 import Form from "./form";
 import StartComponent from "./StartComponent";
 import ResultBar from "./resultComponents/resultBar";
 import ResultList from "./ResultList";
 import "../styles/App.css";
+import Details from "./resultComponents/details";
 
 class App extends Component {
   state = {
     array: [],
-    active: false,
+    activeList: false,
+    activeDetails: false,
   };
 
   formUpdate = () => {
@@ -20,31 +23,56 @@ class App extends Component {
       });
     });
   };
-  handleActive = () => {
+  handleActivelist = () => {
     this.setState({
-      active: true,
+      activeList: true,
     });
   };
+  handleActiveDetails = () => {
+    this.setState({
+      activeDetails: !this.state.activeDetails,
+    });
+  };
+  scrollLock = () => {
+    const scrollTop = window.pageYOffset;
+    const scrollLeft = window.pageXOffset;
+    window.onscroll = function () {
+      window.scrollTo(scrollLeft, scrollTop);
+    };
+  };
+
   render() {
+    const { array, activeList, activeDetails } = this.state;
     let count = 0;
-    const showlaptop = this.state.array.map((laptop) => (
+    const showlaptop = array.map((laptop) => (
       <div key={laptop._id}>
         <span className="position">{++count}</span>
         <span className="laptopFullName">
           {laptop.Manufacturer} {laptop.Model_Name}
         </span>
         <ResultBar result={laptop.sawResult} />
-        <span className="details">det</span>
+        <button className="detailButton" onClick={this.handleActiveDetails}>
+          Dane techniczne
+        </button>
       </div>
     ));
-    // console.log(this.state.array);
+    if (activeDetails) {
+      this.scrollLock();
+    }
+    console.log(activeDetails);
+
     return (
       <div className="App">
         <StartComponent />
-        <Form formUpdate={this.formUpdate} activeResult={this.handleActive} />
-        <ResultList result={showlaptop} active={this.state.active} />
-
-        {/* <div >{showlaptop}</div> */}
+        <Form
+          formUpdate={this.formUpdate}
+          activeResult={this.handleActivelist}
+        />
+        <ResultList result={showlaptop} active={activeList} />
+        <Details
+          active={activeDetails}
+          changeActive={this.handleActiveDetails}
+        />
       </div>
     );
   }
