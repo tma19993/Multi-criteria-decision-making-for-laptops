@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/resultList.css";
 const ResultList = (props) => {
-  console.log(props.active);
+  // console.log(props.active);
   return (
     <>
       {props.active ? (

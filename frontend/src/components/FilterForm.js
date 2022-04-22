@@ -13,17 +13,15 @@ class FilterForm extends Component {
     });
   };
   render() {
-    const {
-      manufacturerList,
-      categoryList,
-      screenSizeList,
-      operationSystemList,
-    } = this.state.array;
+    // const {
+    //   manufacturerList,
+    //   categoryList,
+    //   screenSizeList,
+    //   operationSystemList,
+    // } = this.state.array;
     // console.log(manufacturerList);
 
-    return <div className="filterForm">
-      
-    </div>;
+    return <div className="filterForm"></div>;
   }
 }
 
