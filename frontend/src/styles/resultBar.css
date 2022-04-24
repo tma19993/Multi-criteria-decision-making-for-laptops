@@ -13,3 +13,10 @@
   margin: 0 auto;
   height: 40%;
 }
+
+@media (orientation:portrait) and (min-width:320px) {
+  .backroundResultBar {
+    display: none;
+
+  }
+}

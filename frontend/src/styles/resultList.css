@@ -1,7 +1,7 @@
 .resultBar {
   background-color: #c0bd8d;
-  width: 70%;
-  margin: 10% auto 0 auto;
+  width: 80%;
+  margin: 5% auto 0 auto;
   border-radius: 30px;
   display: grid;
   grid-template-columns: 1fr 2fr 5fr 2fr;
@@ -17,12 +17,12 @@
 
 
 .resultList {
-  width: 70%;
+  width: 80%;
   margin: 0 auto;
-
+  padding-bottom: 50px;
 }
 
-.resultList div {
+.resultList .laptopslist {
   background-color: #fff;
   padding: 40px 0;
   display: grid;
@@ -32,4 +32,93 @@
   font-size: 18px;
   text-align: center;
   border-radius: 30px;
+}
+
+
+.paginationList {
+  display: flex;
+  list-style: none;
+  margin: 0 auto;
+  width: 70%;
+  justify-content: flex-end;
+}
+
+.paginationList .Page {
+  margin: 0 2px;
+  font-size: 20px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.paginationList .Page a {
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+
+}
+
+.paginationList .Page a.active {
+  color: #c0bd8d;
+}
+
+.PostsChanger {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.PostsChanger button {
+  background-color: transparent;
+  font-size: 24px;
+  border: none;
+
+
+}
+
+.PostsChanger button a {
+  color: #fff;
+  transition: .2s;
+  text-decoration: none;
+}
+
+.PostsChanger button a.disable {
+  color: gray;
+  cursor: context-menu;
+}
+
+.PostsChanger button a.disable:hover {
+  color: gray;
+}
+
+.PostsChanger button a:hover {
+  color: #c0bd8d;
+}
+
+.PostsChanger span {
+  color: #fff;
+  font-size: 32px;
+  padding: 0 5px;
+  margin: 0 10px;
+}
+
+
+@media (orientation:portrait) and (min-width:320px) {
+  .resultBar {
+    grid-template-columns: 1fr 2fr 2fr;
+  }
+
+  .resultBar p {
+    font-size: 8px;
+    padding: 20px 10px;
+  }
+
+  .resultBar p:nth-of-type(3) {
+    display: none;
+  }
+
+  .resultList .laptopslist {
+    grid-template-columns: 1fr 2fr 2fr;
+    font-size: 10px;
+
+  }
 }

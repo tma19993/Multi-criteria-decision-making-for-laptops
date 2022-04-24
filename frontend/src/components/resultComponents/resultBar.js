@@ -5,7 +5,7 @@ const ResultBar = (props) => {
   const widthResultBar = {
     height: "100%",
     width: widthInsideBar + "%",
-    margin: "0 ",
+    margin: "0",
     backgroundColor: "#c0bd8d",
   };
   return (
