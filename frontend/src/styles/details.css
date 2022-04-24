@@ -6,49 +6,67 @@
   bottom: 0;
   z-index: 1;
   background-color: rgba(68, 68, 68, 0.4);
-  color: #031630;
 }
 
-.detailWindowBGW h2 {
-  display: inline-block;
-  border-radius: 20px;
-  padding: 10px;
-  background-color: rgb(225, 214, 135);
-  text-transform: uppercase;
-  margin: 10%;
-  font-size: 38px;
-}
 
 .detailWindow {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 50px;
+  padding: 20px;
   background-color: #fff;
   display: flex;
   justify-content: center;
   align-items: stretch;
-  gap: 5px;
+  color: #031630;
+
 }
 
-.detailWindow .leftDetail {
-  text-align: right;
+.detailWindow div p:nth-of-type(1) {
+  font-size: 24px;
 }
 
-.detailWindow .rightDetail {
-  text-align: left;
+.detailWindow div {
+  text-align: center;
 }
+
+.detailWindow div p {
+  border: 2px solid #031630;
+  padding: 10px;
+  border-bottom: none;
+
+}
+
+
+.detailWindow .leftDetail p {
+  border-right: none;
+}
+
+.detailWindow div p:nth-last-of-type(1) {
+  border-bottom: 2px solid #031630;
+}
+
 
 .quit {
   position: fixed;
-  top: 32%;
-  right: 26%;
-  transform: translate(-50%, -50%);
+  top: 0%;
+  right: 0%;
   z-index: 2;
   background-color: transparent;
   border: none;
   cursor: pointer;
-  width: 50px;
-  height: 50px;
+  margin: 15px;
+}
+
+.quit svg {
+  font-size: 36px;
+  color: #fff;
+
+
+  transition: .2s;
+}
+
+.quit svg:hover {
+  color: #e1d687;
 }

@@ -6,8 +6,8 @@ import Form from "./form";
 import StartComponent from "./StartComponent";
 import ResultBar from "./resultComponents/resultBar";
 import ResultList from "./ResultList";
+import GeneratePDF from "./GeneratePDF";
 import "../styles/App.css";
-
 
 class App extends Component {
   state = {
@@ -15,7 +15,7 @@ class App extends Component {
     activeList: false,
   };
 
-  formUpdate = () => {
+  formUpdate = async () => {
     axios.get("http://localhost:5000/GlobalArray").then((response) => {
       this.setState({
         array: response.data,
@@ -41,7 +41,7 @@ class App extends Component {
         <DetailsButton array={laptop} count={count} />
       </div>
     ));
-
+    // console.log(showlaptop.length);
     return (
       <div className="App">
         <StartComponent />
@@ -49,6 +49,7 @@ class App extends Component {
           formUpdate={this.formUpdate}
           activeResult={this.handleActivelist}
         />
+        <GeneratePDF array={array} />
         <ResultList result={showlaptop} active={activeList} />
       </div>
     );

@@ -2,6 +2,16 @@ import React, { Component } from "react";
 import "../styles/StartComponent.css";
 import logo from "../pictures/logo.png";
 class StartComponent extends Component {
+  scrollToForm = (e) => {
+    e.preventDefault();
+    const scrollLeft = window.pageXOffset;
+    let formPositionTop = document.getElementById("formId").offsetTop;
+    window.scroll({
+      top: formPositionTop,
+      left: scrollLeft,
+      behavior: "smooth",
+    });
+  };
   render() {
     return (
       <section id="StartSide">
@@ -12,7 +22,7 @@ class StartComponent extends Component {
           <p>Ta aplikcaja pomoże ci wybrać swój wymarzony laptop</p>
         </div>
         <div className="startBTN">
-          <a href="#formId" className="start">
+          <a className="start" onClick={this.scrollToForm}>
             Zaczynajmy
           </a>
         </div>
@@ -21,3 +31,5 @@ class StartComponent extends Component {
   }
 }
 export default StartComponent;
+
+// href="#formId"

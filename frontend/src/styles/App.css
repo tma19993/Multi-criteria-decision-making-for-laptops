@@ -2,13 +2,8 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-}
-
-* {
-  scrollbar-width: auto;
   scrollbar-color: #c0bd8d transparent;
 }
-
 
 *::-webkit-scrollbar {
   width: 16px;
@@ -27,7 +22,6 @@
 
 html {
   overflow: overlay;
-  scroll-behavior: smooth;
   background-color: #031630;
 
 }
@@ -35,6 +29,7 @@ html {
 .App {
   color: #031630;
 }
+
 
 .detailButton {
   margin: 0 auto;
@@ -48,4 +43,35 @@ html {
 
 .detailButton:hover {
   color: #c0bd8d;
+}
+
+.pdfObject {
+  text-align: center;
+  margin: 3% auto 0 auto;
+}
+
+.pdfObject .pdf {
+  background-color: #c0bd8d;
+  border: none;
+  font-size: 22px;
+  padding: 20px 30px;
+  border-radius: 20px;
+  color: #031630;
+  transition: .2s;
+  cursor: pointer;
+}
+
+.pdfObject .pdf:hover {
+  background-color: #fff;
+}
+
+@media (orientation:portrait) and (min-width:320px) {
+  .pdfObject .pdf {
+    font-size: 10px;
+    padding: 10px 20px;
+  }
+
+  .detailButton {
+    font-size: 10px;
+  }
 }

@@ -1,24 +1,22 @@
-*{
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-.form{
+.form {
   min-height: 100vh;
   background-color: #13253d;
   color: #fff;
 }
-.formHeader{
+
+.formHeader {
   text-align: center;
-  font-size: 68px;
+  font-size: 40px;
 }
-form{
+
+form {
   text-align: center;
 }
-.wypel{
+
+.wypel {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   text-align: center;
 }

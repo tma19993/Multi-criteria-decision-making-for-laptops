@@ -13,14 +13,15 @@ const Details = (props) => {
     Storage,
     GPU,
     Operating_System,
+    Operating_System_Version,
     Weight,
     Price_in_Euros,
   } = props.array;
   return (
     <section className="detailWindowBGW">
-       <h2>Specyfikacja laptopa na miejscu {props.position}</h2>
       <section className="detailWindow">
         <div className="leftDetail">
+          <p>Miejsce:</p>
           <p>Marka:</p>
           <p>Model:</p>
           <p>Kategoria:</p>
@@ -31,10 +32,12 @@ const Details = (props) => {
           <p>Pamięc wewnętrzna:</p>
           <p>Karta graficzna:</p>
           <p>System operacyjny:</p>
+          <p>Wersja Systemu:</p>
           <p>Waga:</p>
-          <p>Cena w euro:</p>
+          <p>Cena:</p>
         </div>
         <div className="rightDetail">
+          <p>{props.position}</p>
           <p>{Manufacturer}</p>
           <p>{Model_Name}</p>
           <p>{Category}</p>
@@ -45,8 +48,9 @@ const Details = (props) => {
           <p>{Storage}</p>
           <p>{GPU}</p>
           <p>{Operating_System}</p>
+          <p>{Operating_System_Version}</p>
           <p>{Weight}</p>
-          <p>{Price_in_Euros}</p>
+          <p>{Price_in_Euros} &#8364;</p>
         </div>
       </section>
     </section>
