@@ -54,7 +54,6 @@ const GeneratePDF = (props) => {
   if (array.length > 0) {
     return (
       <section className="pdfObject">
-        <p></p>
         <button onClick={pdfGenerate} className="pdf">
           Pobierz wyniki w pdf
         </button>

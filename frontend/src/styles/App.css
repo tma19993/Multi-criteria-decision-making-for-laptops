@@ -37,7 +37,6 @@ html {
   background-color: transparent;
   border: none;
   cursor: pointer;
-  font-size: 16px;
   transition: .1s;
 }
 
@@ -53,8 +52,6 @@ html {
 .pdfObject .pdf {
   background-color: #c0bd8d;
   border: none;
-  font-size: 22px;
-  padding: 20px 30px;
   border-radius: 20px;
   color: #031630;
   transition: .2s;
@@ -73,5 +70,62 @@ html {
 
   .detailButton {
     font-size: 10px;
+  }
+
+
+}
+
+@media (orientation: portrait) and (min-width: 410px) {
+  .pdfObject .pdf {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+
+  .detailButton {
+    font-size: 14px;
+  }
+}
+
+@media (orientation: portrait) and (min-width: 768px) {
+  .pdfObject .pdf {
+    font-size: 18px;
+    padding: 15px 25px;
+  }
+
+  .detailButton {
+    font-size: 18px;
+  }
+}
+
+@media (orientation: landscape) {
+  .pdfObject .pdf {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+
+  .detailButton {
+    font-size: 14px;
+  }
+}
+
+@media(orientation:landscape) and (min-width:640px) {
+  .pdfObject .pdf {
+    font-size: 18px;
+    padding: 15px 25px;
+  }
+
+  .detailButton {
+    font-size: 14px;
+  }
+}
+
+@media(orientation:landscape) and (min-width:1024px) {
+  .pdfObject .pdf {
+    font-size: 22px;
+    padding: 20px 30px;
+  }
+
+  .detailButton {
+    font-size: 18px;
   }
 }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/resultList.css";
+import "../../styles/resultList.css";
 import { ImPrevious2, ImNext2, ImLast, ImFirst } from "react-icons/im";
 
 const ResultList = (props) => {

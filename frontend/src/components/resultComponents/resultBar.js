@@ -9,11 +9,14 @@ const ResultBar = (props) => {
     backgroundColor: "#c0bd8d",
   };
   return (
-    <section className="backroundResultBar">
-      <section>
-        <section style={widthResultBar}></section>
+    <>
+      <section className="backroundResultBar">
+        <section>
+          <section style={widthResultBar}></section>
+        </section>
       </section>
-    </section>
+      <p className="numberResultBar">{Math.round(widthInsideBar)} / 100</p>
+    </>
   );
 };
 
