@@ -6,6 +6,7 @@ const DetailsButton = (props) => {
   const scrollLock = () => {
     const scrollTop = window.pageYOffset;
     const scrollLeft = window.pageXOffset;
+
     window.onscroll = function () {
       window.scrollTo(scrollLeft, scrollTop);
     };
@@ -21,11 +22,13 @@ const DetailsButton = (props) => {
         Specyfikacja
       </button>
       {active ? (
-        <button onClick={() => setActive(!active)} className="quit">
-          <ImCross />
-        </button>
+        <>
+          <button onClick={() => setActive(!active)} className="quit">
+            <ImCross />
+          </button>
+          <Details array={props.array} position={props.count} />
+        </>
       ) : null}
-      {active ? <Details array={props.array} position={props.count} /> : null}
     </>
   );
 };

@@ -13,10 +13,28 @@ form {
   text-align: center;
 }
 
-.wypel {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
+.filtrationForm {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  color: #fff;
+}
+
+.filtrationForm .SawMethod {
+  color: #fff;
+}
+
+.SubmitButton {
+  background-color: #e1d687;
+  color: #13253d;
+  padding: 20px 30px;
+  border-radius: 20px;
+  font-size: 24px;
+  border: none;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.SubmitButton:hover {
+  background-color: #fff;
 }
