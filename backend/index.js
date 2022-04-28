@@ -3,9 +3,10 @@ const express = require("express");
 const app = express();
 const colors = require("colors");
 const bodyParser = require("body-parser");
-const e = require("express");
 
 const port = 5000;
+
+//potrzeba zrobić 2 foreach'e ponieważ nie znajdziemy wartości
 
 let cpuRatio = 0.3;
 let gpuRatio = 0.25;
@@ -39,6 +40,7 @@ app.use(
     extended: true,
   })
 );
+
 app.use(bodyParser.json());
 
 MongoClient.connect("mongodb://localhost:27017", (error, laptops) => {
@@ -96,124 +98,119 @@ app.post("/GetRatio", (req, res) => {
   storageRatio = req.body.storage;
   price_ratio = req.body.price;
 
-  // console.log(req.body);
-
+  cpuRatio = parseFloat(cpuRatio) / 100;
+  gpuRatio = parseFloat(gpuRatio) / 100;
+  ramRatio = parseFloat(ramRatio) / 100;
+  storageRatio = parseFloat(storageRatio) / 100;
+  price_ratio = parseFloat(price_ratio) / 100;
   // połączenie z bazą
   MongoClient.connect("mongodb://localhost:27017", (error, laptops) => {
     if (error) {
       console.log("Błąd połączenia z bazą danych");
       laptops.close();
     } else {
+      // console.log("Jesteś połączony z bazą danych".green);
+      // console.log("Za 5 sekund uruchomi się aplikacja".red);
       console.log("Aktualizacja rankingu".green);
+
       const database = laptops.db("Dane");
       const lap = database.collection("laptops");
-
       lap.find({}).toArray((err, laptopsData) => {
         if (err) {
           console.log("Błąd zapytania".bold.red);
         } else {
           // console.log("Zapytanie zostało przyjęte");
-          if (laptopsData.length === 0) {
-            console.log("brak danych");
-          } else {
-            laptopsDatabase = laptopsData;
-            let finialArray = [];
-            let maxCpu = 0;
-            let maxGpu = 0;
-            let maxStorage = 0;
-            let maxRam = 0;
-            let minPrice = parseFloat(laptopsDatabase[0].Price_in_Euros);
 
-            //pętla szykająca max wartości
-            laptopsDatabase.forEach((laptop) => {
-              //destrukturyzacja bazy danych
-              let { CPU_Mark, G3D_Mark, Price_in_Euros, RAM, Storage } = laptop;
-              //Parsowanie danych z bazy
-              CPU_Mark = parseInt(CPU_Mark);
-              G3D_Mark = parseInt(G3D_Mark);
-              Price_in_Euros = parseFloat(Price_in_Euros);
-              RAM = parseInt(RAM);
-              Storage = parseInt(Storage);
+          laptopsDatabase = laptopsData;
 
-              //Szukanie największej wartości
-              if (CPU_Mark > maxCpu) {
-                maxCpu = CPU_Mark;
-              }
-              if (G3D_Mark > maxGpu) {
-                maxGpu = G3D_Mark;
-              }
-              if (RAM > maxRam) {
-                maxRam = RAM;
-              }
-              if (Storage > maxStorage) {
-                maxStorage = Storage;
-              }
-              if (minPrice > Price_in_Euros) {
-                minPrice = Price_in_Euros;
-              }
+          let finialArray = [];
 
-              // console.log(`Cpu:${maxCpu} Gpu: ${maxGpu} Ram: ${maxRam} Storage: ${maxStorage} Price: ${minPrice}`);
-              //koniec foreach szukający wartości max
+          let maxCpu = 0;
+          let maxGpu = 0;
+          let maxStorage = 0;
+          let maxRam = 0;
+          let minPrice = parseFloat(laptopsDatabase[0].Price_in_Euros);
+
+          //pętla szykająca max wartości
+          laptopsDatabase.forEach((laptop) => {
+            //destrukturyzacja bazy danych
+            let { CPU_Mark, G3D_Mark, Price_in_Euros, RAM, Storage } = laptop;
+            //Parsowanie danych z bazy
+            CPU_Mark = parseInt(CPU_Mark);
+            G3D_Mark = parseInt(G3D_Mark);
+            Price_in_Euros = parseFloat(Price_in_Euros);
+            RAM = parseInt(RAM);
+            Storage = parseInt(Storage);
+
+            //Szukanie największej wartości
+            if (CPU_Mark > maxCpu) {
+              maxCpu = CPU_Mark;
+            }
+            if (G3D_Mark > maxGpu) {
+              maxGpu = G3D_Mark;
+            }
+            if (RAM > maxRam) {
+              maxRam = RAM;
+            }
+            if (Storage > maxStorage) {
+              maxStorage = Storage;
+            }
+            if (minPrice > Price_in_Euros) {
+              minPrice = Price_in_Euros;
+            }
+
+            //koniec foreach szukający wartości max
+          });
+          //forEach na obliczenia
+          laptopsDatabase.forEach((laptop) => {
+            //destrukturyzacja bazy danych
+            let { _id, CPU_Mark, G3D_Mark, Price_in_Euros, RAM, Storage } =
+              laptop;
+            //Parsowanie danych z bazy
+            CPU_Mark = parseInt(CPU_Mark);
+            G3D_Mark = parseInt(G3D_Mark);
+            Price_in_Euros = parseFloat(Price_in_Euros);
+            RAM = parseInt(RAM);
+            Storage = parseInt(Storage);
+
+            //działania
+            const cpuRating = (CPU_Mark / maxCpu) * cpuRatio;
+            const gpuRating = (G3D_Mark / maxGpu) * gpuRatio;
+            const ramRating = (RAM / maxRam) * ramRatio;
+            const storageRating = (Storage / maxStorage) * storageRatio;
+            const priceRating = (minPrice / Price_in_Euros) * price_ratio;
+            //suma
+            const result =
+              cpuRating + gpuRating + ramRating + storageRating + priceRating;
+            //wstawianie do tablicy raitingów
+            ratigArray.push({
+              _id: _id,
+              result,
             });
-            //forEach na obliczenia
-            laptopsDatabase.forEach((laptop) => {
-              //destrukturyzacja bazy danych
-              let { _id, CPU_Mark, G3D_Mark, Price_in_Euros, RAM, Storage } =
-                laptop;
-              //Parsowanie danych z bazy
-              CPU_Mark = parseInt(CPU_Mark);
-              G3D_Mark = parseInt(G3D_Mark);
-              Price_in_Euros = parseFloat(Price_in_Euros);
-              RAM = parseInt(RAM);
-              Storage = parseInt(Storage);
+          });
+          //sortowanie tablicy raitingów
+          ratigArray.sort((a, b) => (a.result > b.result ? 1 : -1));
+          ratigArray.reverse();
 
-              //działania
-              const cpuRating = (CPU_Mark / maxCpu) * cpuRatio;
-              const gpuRating = (G3D_Mark / maxGpu) * gpuRatio;
-              const ramRating = (RAM / maxRam) * ramRatio;
-              const storageRating = (Storage / maxStorage) * storageRatio;
-              const priceRating = (minPrice / Price_in_Euros) * price_ratio;
-              //suma
-              const result =
-                cpuRating + gpuRating + ramRating + storageRating + priceRating;
-              //wstawianie do tablicy raitingów
-              ratigArray.push({
-                _id: _id,
-                result,
-              });
-            });
-            //sortowanie tablicy raitingów
-            ratigArray.sort((a, b) => (a.result > b.result ? 1 : -1));
-            ratigArray.reverse();
+          //wstawianie posortowanych danych do tablicy
+          ratigArray.forEach((finalLaptop) => {
+            for (let i = 0; i < laptopsDatabase.length; i++) {
+              if (finalLaptop._id === laptopsDatabase[i]._id) {
+                finialArray.push(laptopsDatabase[i]);
+              }
+            }
+          });
 
-            // console.log(ratigArray);
-
-            //wstawianie posortowanych danych do tablicy
-            ratigArray.forEach((finalLaptop) => {
-              for (let i = 0; i < laptopsDatabase.length; i++) {
-                if (finalLaptop._id === laptopsDatabase[i]._id) {
-                  finialArray.push(laptopsDatabase[i]);
-                }
+          globalArray = finialArray;
+          globalArray.forEach((laptop) => {
+            ratigArray.forEach((rating) => {
+              if (laptop._id === rating._id) {
+                laptop.sawResult = rating.result;
               }
             });
-            // console.log(finialArray);
-
-            globalArray = finialArray;
-            globalArray.forEach((laptop) => {
-              ratigArray.forEach((result) => {
-                if (result._id === laptop._id) {
-                  laptop.sawResult = result.result;
-                }
-              });
-            });
-
-            app.get("/GlobalArray", (req, res) => res.send(globalArray));
-            laptops.close();
-          }
-
-          //Dodanie wyniku SAW do tablicy
-
-          // console.log(ratigArray);
+          });
+          //zakończenie połączenia
+          laptops.close();
           //koniec else
         }
 
@@ -222,9 +219,11 @@ app.post("/GetRatio", (req, res) => {
     }
     //koniec connect
   });
-  //koniec post
 });
 
+// console.log(globalArray);
+app.get("/", (req, res) => res.send("Hello world"));
+app.get("/GlobalArray", (req, res) => res.send(globalArray));
 //komunikaty na końcu
 app.listen(port, () => {
   console.log("Aplikacja działa".bold.green);

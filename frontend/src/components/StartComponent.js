@@ -22,9 +22,9 @@ class StartComponent extends Component {
           <p>Ta aplikcaja pomoże ci wybrać swój wymarzony laptop</p>
         </div>
         <div className="startBTN">
-          <a className="start" onClick={this.scrollToForm}>
+          <button className="start" onClick={this.scrollToForm}>
             Zaczynajmy
-          </a>
+          </button>
         </div>
       </section>
     );

@@ -11,7 +11,6 @@ class Form extends Component {
     price: 0,
   };
   connectionProps = () => {
-    setTimeout(this.props.formUpdate(), 1000);
     this.props.activeResult();
   };
   handleEvent = (e) => {
@@ -29,6 +28,7 @@ class Form extends Component {
       storage: storage / 100,
       price: price / 100,
     };
+    console.log(frontRatio);
     axios
       .post("http://localhost:5000/GetRatio", frontRatio)
       .then((response) => {
@@ -41,6 +41,7 @@ class Form extends Component {
   };
   render() {
     const { cpu, gpu, ram, storage, price } = this.state;
+    console.log(cpu);
     return (
       <section className="form" id="formId">
         <h2 className="formHeader">Formularz</h2>

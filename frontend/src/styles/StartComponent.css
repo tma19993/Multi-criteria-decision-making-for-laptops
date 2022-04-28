@@ -37,7 +37,7 @@ section {
   font-size: 38px;
 }
 
-a.start {
+button.start {
   display: block;
   position: absolute;
   top: 65%;
@@ -55,7 +55,7 @@ a.start {
   cursor: pointer;
 }
 
-a.start:hover {
+button.start:hover {
   background-color: #e1d687;
   color: #031630;
 }
@@ -80,7 +80,7 @@ a.start:hover {
     font-size: 24px;
   }
 
-  a.start {
+  button.start {
     font-size: 24px;
     top: 70%;
   }
@@ -101,7 +101,7 @@ a.start:hover {
     font-size: 28px;
   }
 
-  a.start {
+  button.start {
     font-size: 24px;
 
   }
@@ -118,7 +118,7 @@ a.start:hover {
     font-size: 36px;
   }
 
-  a.start {
+  button.start {
     font-size: 32px;
   }
 }
@@ -142,7 +142,7 @@ a.start:hover {
     font-size: 20px;
   }
 
-  a.start {
+  button.start {
     font-size: 18px;
     top: 70%;
   }
@@ -166,7 +166,7 @@ a.start:hover {
     font-size: 24px;
   }
 
-  a.start {
+  button.start {
     font-size: 24px;
     top: 70%;
   }
@@ -188,7 +188,7 @@ a.start:hover {
     font-size: 28px;
   }
 
-  a.start {
+  button.start {
     font-size: 28px;
 
   }
@@ -208,7 +208,7 @@ a.start:hover {
     font-size: 32px;
   }
 
-  a.start {
+  button.start {
     font-size: 32px;
 
   }
