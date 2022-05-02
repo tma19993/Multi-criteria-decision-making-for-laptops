@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import "../styles/StartComponent.css";
-import logo from "../pictures/logo.png";
+import "../../styles/StartComponent.css";
+import logo from "../../pictures/logo.png";
 class StartComponent extends Component {
   scrollToForm = (e) => {
     e.preventDefault();
@@ -22,9 +22,9 @@ class StartComponent extends Component {
           <p>Ta aplikcaja pomoże ci wybrać swój wymarzony laptop</p>
         </div>
         <div className="startBTN">
-          <a className="start" onClick={this.scrollToForm}>
+          <button className="start" onClick={this.scrollToForm}>
             Zaczynajmy
-          </a>
+          </button>
         </div>
       </section>
     );

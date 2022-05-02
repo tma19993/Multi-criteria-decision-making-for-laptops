@@ -1,34 +1,26 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import FilterForm from "./FilterForm";
 import "../../styles/form.css";
-class Form extends Component {
-  state = {
-    cpu: 0,
-    gpu: 0,
-    ram: 0,
-    storage: 0,
-    price: 0,
-  };
-  connectionProps = () => {
-    setTimeout(this.props.formUpdate(), 1000);
-    this.props.activeResult();
-  };
-  handleEvent = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
-  };
-  handleSubmit = (e) => {
+
+const Form = () => {
+  const [cpu, setCpu] = useState(0);
+  const [gpu, setGpu] = useState(0);
+  const [ram, setRam] = useState(0);
+  const [storage, setStorage] = useState(0);
+  const [price, setPrice] = useState(0);
+  const navigate = useNavigate();
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const { cpu, gpu, ram, storage, price } = this.state;
     const frontRatio = {
-      cpu: cpu / 100,
-      gpu: gpu / 100,
-      ram: ram / 100,
-      storage: storage / 100,
-      price: price / 100,
+      cpu,
+      gpu,
+      ram,
+      storage,
+      price,
     };
+    console.log(frontRatio);
     axios
       .post("http://localhost:5000/GetRatio", frontRatio)
       .then((response) => {
@@ -38,152 +30,107 @@ class Form extends Component {
         console.log(err);
         console.log("Problem przy axios.post");
       });
+    navigate("/result");
   };
-  render() {
-    const { cpu, gpu, ram, storage, price } = this.state;
-    return (
-      <section className="form" id="formId">
-        <h2 className="formHeader">Formularz</h2>
-
-        <form
-          onSubmit={this.handleSubmit}
-          action="http://localhost:5000/GetRatio"
-          method="POST"
-        >
-          <section className="filtrationForm">
-            <FilterForm />
-            <section className="SawMethod">
+  console.log(`${cpu}, ${gpu}, ${ram}, ${storage}, ${price}`);
+  return (
+    <section className="form" id="formId">
+      <h2 className="formHeader">Formularz</h2>
+      <p className="fromTextHeader">Wprowadź swoje preferencje dotyczące laptopa </p>
+      <form
+        onSubmit={handleSubmit}
+        action="http://localhost:5000/GetRatio"
+        method="POST"
+      >
+        <section className="filtrationForm">
+          <FilterForm />
+          <section className="SawMethod">
+            <h2>Wspomaganie decyzji</h2>
+            <p>
+              W tej części formularza wybierasz co jest dla ciebie bardzo ważne
+              lub mało ważne.
+            </p>
+            <section className="ratios">
+              <h4>Procesor</h4>
               <div className="inputCpuStyle">
-                <h6>CPU</h6>
+                <span>Mało ważny</span>
                 <input
                   type="range"
                   name="cpu"
                   value={cpu}
                   min="0"
-                  max={
-                    parseInt(gpu) +
-                      parseInt(ram) +
-                      parseInt(storage) +
-                      parseInt(price) >=
-                    100
-                      ? 0
-                      : 100 -
-                        parseInt(gpu) +
-                        parseInt(ram) +
-                        parseInt(storage) +
-                        parseInt(price)
-                  }
-                  onChange={(e) => this.handleEvent(e)}
+                  max="100"
+                  onChange={(e) => setCpu(e.target.value)}
                 />
+                <span>Bardzo ważny</span>
               </div>
+              <h4>Karta Graficzna</h4>
               <div className="inputGpuStyle">
-                <h6>GPU</h6>
+                <span>Mało ważny</span>
                 <input
                   type="range"
                   name="gpu"
                   value={gpu}
                   min="0"
-                  max={
-                    parseInt(cpu) +
-                      parseInt(ram) +
-                      parseInt(storage) +
-                      parseInt(price) >=
-                    100
-                      ? 0
-                      : 100 -
-                        parseInt(cpu) +
-                        parseInt(ram) +
-                        parseInt(storage) +
-                        parseInt(price)
-                  }
-                  onChange={(e) => this.handleEvent(e)}
+                  max="100"
+                  onChange={(e) => setGpu(e.target.value)}
                 />
+                <span>Bardzo ważny</span>
               </div>
+              <h4>Pamięć RAM</h4>
               <div className="inputRamStyle">
-                <h6>RAM</h6>
+                <span>Mało ważna</span>
                 <input
                   type="range"
                   name="ram"
                   value={ram}
                   min="0"
-                  max={
-                    parseInt(cpu) +
-                      parseInt(gpu) +
-                      parseInt(storage) +
-                      parseInt(price) >=
-                    100
-                      ? 0
-                      : 100 -
-                        parseInt(cpu) +
-                        parseInt(gpu) +
-                        parseInt(storage) +
-                        parseInt(price)
-                  }
-                  onChange={(e) => this.handleEvent(e)}
+                  max="100"
+                  onChange={(e) => setRam(e.target.value)}
                 />
+                <span>Bardzo ważna</span>
               </div>
+              <h4>Pamięć wewnętrzna</h4>
               <div className="inputStorageStyle">
-                <h6>Storage</h6>
+                <span>Mało ważna</span>
                 <input
                   type="range"
                   name="storage"
                   value={storage}
                   min="0"
-                  max={
-                    parseInt(cpu) +
-                      parseInt(gpu) +
-                      parseInt(ram) +
-                      parseInt(price) >=
-                    100
-                      ? 0
-                      : 100 -
-                        parseInt(cpu) +
-                        parseInt(gpu) +
-                        parseInt(ram) +
-                        parseInt(price)
-                  }
-                  onChange={(e) => this.handleEvent(e)}
+                  max="100"
+                  onChange={(e) => setStorage(e.target.value)}
                 />
+                <span>Bardzo ważna</span>
               </div>
+              <h4>Cena</h4>
               <div className="inputPriceStyle">
-                <h6>Price</h6>
+                <span>Mało ważna</span>
                 <input
                   type="range"
                   name="price"
                   value={price}
                   min="0"
-                  max={
-                    parseInt(cpu) +
-                      parseInt(gpu) +
-                      parseInt(ram) +
-                      parseInt(storage) >=
-                    100
-                      ? 0
-                      : 100 -
-                        parseInt(cpu) +
-                        parseInt(gpu) +
-                        parseInt(ram) +
-                        parseInt(storage)
-                  }
-                  onChange={(e) => this.handleEvent(e)}
+                  max="100"
+                  onChange={(e) => setPrice(e.target.value)}
                 />
+                <span>Bardzo ważna</span>
               </div>
             </section>
           </section>
-          <button
-            type="submit"
-            name="button"
-            onClick={this.connectionProps}
-            className="SubmitButton"
-          >
-            Wyślij
-          </button>
-        </form>
+        </section>
 
-        {/* <a href="#StartSide">Wróć do strony startowej</a> */}
-      </section>
-    );
-  }
-}
+        <button
+          to="/result"
+          type="submit"
+          name="button"
+          className="SubmitButton"
+        >
+          Wyślij
+        </button>
+      </form>
+    </section>
+  );
+};
 
 export default Form;

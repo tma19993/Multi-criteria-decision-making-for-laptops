@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { jsPDF } from "jspdf";
 import "jspdf-autotable";
 const GeneratePDF = (props) => {
@@ -54,6 +55,9 @@ const GeneratePDF = (props) => {
   if (array.length > 0) {
     return (
       <section className="pdfObject">
+        <Link to="/" className="backToStart">
+          Wróć do formularza
+        </Link>
         <button onClick={pdfGenerate} className="pdf">
           Pobierz wyniki w pdf
         </button>

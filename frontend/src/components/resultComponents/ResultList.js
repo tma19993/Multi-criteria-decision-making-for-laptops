@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import "../../styles/resultList.css";
 import { ImPrevious2, ImNext2, ImLast, ImFirst } from "react-icons/im";
+import GeneratePDF from "./GeneratePDF";
+import "../../styles/resultList.css";
 
 const ResultList = (props) => {
-  const { active, result } = props;
+  const { result, array } = props;
   const posts = result;
   let [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(30);
@@ -51,54 +52,53 @@ const ResultList = (props) => {
 
   return (
     <>
-      {active ? (
-        <section id="resultListSection">
-          <div className="resultBar">
-            <p>Miejsce</p>
-            <p>Laptop</p>
-            <p>punktacja</p>
-            <p>Szczegóły</p>
-          </div>
+      <GeneratePDF array={array} />
+      <section id="resultListSection">
+        <div className="resultBar">
+          <p>Miejsce</p>
+          <p>Laptop</p>
+          <p>punktacja</p>
+          <p>Szczegóły</p>
+        </div>
 
-          <div className="resultList">{currentPosts}</div>
+        <div className="resultList">{currentPosts}</div>
 
-          <section className="PostsChanger" id="bottomOfList">
-            <button onClick={firstPageButton}>
-              <a
-                href="#bottomOfList"
-                className={currentPage <= 1 ? "disable" : null}
-              >
-                <ImFirst />
-              </a>
-            </button>
-            <button onClick={leftButton}>
-              <a
-                href="#bottomOfList"
-                className={currentPage <= 1 ? "disable" : null}
-              >
-                <ImPrevious2 />
-              </a>
-            </button>
-            <span>{currentPage}</span>
-            <button onClick={rightButton}>
-              <a
-                href="#bottomOfList"
-                className={currentPage >= lastPost ? "disable" : null}
-              >
-                <ImNext2 />
-              </a>
-            </button>
-            <button onClick={lastPageButton}>
-              <a
-                href="#bottomOfList"
-                className={currentPage >= lastPost ? "disable" : null}
-              >
-                <ImLast />
-              </a>
-            </button>
-          </section>
+        <section className="PostsChanger" id="bottomOfList">
+          <button onClick={firstPageButton}>
+            <a
+              href="#bottomOfList"
+              className={currentPage <= 1 ? "disable" : null}
+            >
+              <ImFirst />
+            </a>
+          </button>
+          <button onClick={leftButton}>
+            <a
+              href="#bottomOfList"
+              className={currentPage <= 1 ? "disable" : null}
+            >
+              <ImPrevious2 />
+            </a>
+          </button>
+          <span>{currentPage}</span>
+          <button onClick={rightButton}>
+            <a
+              href="#bottomOfList"
+              className={currentPage >= lastPost ? "disable" : null}
+            >
+              <ImNext2 />
+            </a>
+          </button>
+          <button onClick={lastPageButton}>
+            <a
+              href="#bottomOfList"
+              className={currentPage >= lastPost ? "disable" : null}
+            >
+              <ImLast />
+            </a>
+          </button>
         </section>
-      ) : null}
+      </section>
     </>
   );
 };
