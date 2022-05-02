@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import "../styles/StartComponent.css";
-import logo from "../pictures/logo.png";
+import "../../styles/StartComponent.css";
+import logo from "../../pictures/logo.png";
 class StartComponent extends Component {
   scrollToForm = (e) => {
     e.preventDefault();

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import "../../styles/resultList.css";
 import { ImPrevious2, ImNext2, ImLast, ImFirst } from "react-icons/im";
+import GeneratePDF from "./GeneratePDF";
+import "../../styles/resultList.css";
 
 const ResultList = (props) => {
-  const { result } = props;
+  const { result, array } = props;
   const posts = result;
   let [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(30);
@@ -51,6 +52,7 @@ const ResultList = (props) => {
 
   return (
     <>
+      <GeneratePDF array={array} />
       <section id="resultListSection">
         <div className="resultBar">
           <p>Miejsce</p>

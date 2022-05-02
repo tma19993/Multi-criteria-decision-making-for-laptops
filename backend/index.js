@@ -6,8 +6,6 @@ const bodyParser = require("body-parser");
 
 const port = 5000;
 
-//potrzeba zrobić 2 foreach'e ponieważ nie znajdziemy wartości
-
 let cpuRatio = 0.3;
 let gpuRatio = 0.25;
 let ramRatio = 0.2;
@@ -67,7 +65,7 @@ MongoClient.connect("mongodb://localhost:27017", (error, laptops) => {
         manufacturerList = manufacturerList.filter(
           (manufacturer, index, array) => array.indexOf(manufacturer) === index
         );
-        // console.log(manufacturerList);
+
         categoryList = categoryList.filter(
           (category, index, array) => array.indexOf(category) === index
         );
@@ -103,14 +101,13 @@ app.post("/GetRatio", (req, res) => {
   ramRatio = parseFloat(ramRatio) / 100;
   storageRatio = parseFloat(storageRatio) / 100;
   price_ratio = parseFloat(price_ratio) / 100;
+
   // połączenie z bazą
   MongoClient.connect("mongodb://localhost:27017", (error, laptops) => {
     if (error) {
       console.log("Błąd połączenia z bazą danych");
       laptops.close();
     } else {
-      // console.log("Jesteś połączony z bazą danych".green);
-      // console.log("Za 5 sekund uruchomi się aplikacja".red);
       console.log("Aktualizacja rankingu".green);
 
       const database = laptops.db("Dane");
@@ -119,8 +116,6 @@ app.post("/GetRatio", (req, res) => {
         if (err) {
           console.log("Błąd zapytania".bold.red);
         } else {
-          // console.log("Zapytanie zostało przyjęte");
-
           laptopsDatabase = laptopsData;
 
           let finialArray = [];
@@ -180,8 +175,46 @@ app.post("/GetRatio", (req, res) => {
             const storageRating = (Storage / maxStorage) * storageRatio;
             const priceRating = (minPrice / Price_in_Euros) * price_ratio;
             //suma
-            const result =
-              cpuRating + gpuRating + ramRating + storageRating + priceRating;
+            const additiveRatios =
+              cpuRatio + gpuRatio + ramRatio + storageRatio + price_ratio;
+            let result = 0;
+            if (additiveRatios <= 1) {
+              result =
+                cpuRating + gpuRating + ramRating + storageRating + priceRating;
+            } else if (additiveRatios <= 2) {
+              result =
+                (cpuRating +
+                  gpuRating +
+                  ramRating +
+                  storageRating +
+                  priceRating) /
+                2;
+            } else if (additiveRatios <= 3) {
+              result =
+                (cpuRating +
+                  gpuRating +
+                  ramRating +
+                  storageRating +
+                  priceRating) /
+                3;
+            } else if (additiveRatios <= 4) {
+              result =
+                (cpuRating +
+                  gpuRating +
+                  ramRating +
+                  storageRating +
+                  priceRating) /
+                4;
+            } else {
+              result =
+                (cpuRating +
+                  gpuRating +
+                  ramRating +
+                  storageRating +
+                  priceRating) /
+                5;
+            }
+
             //wstawianie do tablicy raitingów
             ratigArray.push({
               _id: _id,
@@ -221,7 +254,6 @@ app.post("/GetRatio", (req, res) => {
   });
 });
 
-// console.log(globalArray);
 app.get("/", (req, res) => res.send("Hello world"));
 app.get("/GlobalArray", (req, res) => res.send(globalArray));
 //komunikaty na końcu
