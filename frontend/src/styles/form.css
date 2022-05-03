@@ -1,8 +1,8 @@
 input[type=range] {
-  height: 48px;
+  height: 30px;
   -webkit-appearance: none;
   margin: 10px 0;
-  width: 70%;
+  width: 60%;
   background-color: transparent;
 }
 
@@ -14,10 +14,8 @@ input[type=range]::-webkit-slider-runnable-track {
   width: 100%;
   height: 9px;
   cursor: pointer;
-
   box-shadow: 1px 1px 1px #031630;
   background-color: #E1D687;
-  border-radius: 0px;
   border: 1px solid #031630;
 }
 
@@ -26,7 +24,6 @@ input[type=range]::-webkit-slider-thumb {
   border: 1px solid #031630;
   height: 40px;
   width: 20px;
-  border-radius: 0px;
   background: #C0BD8D;
   cursor: pointer;
   -webkit-appearance: none;
@@ -41,10 +38,8 @@ input[type=range]::-moz-range-track {
   width: 100%;
   height: 9px;
   cursor: pointer;
-
   box-shadow: 1px 1px 1px #031630;
   background: #E1D687;
-  border-radius: 0px;
   border: 1px solid #031630;
 }
 
@@ -53,7 +48,6 @@ input[type=range]::-moz-range-thumb {
   border: 1px solid #031630;
   height: 40px;
   width: 20px;
-  border-radius: 0px;
   background: #C0BD8D;
   cursor: pointer;
 }
@@ -62,7 +56,6 @@ input[type=range]::-ms-track {
   width: 100%;
   height: 9px;
   cursor: pointer;
-
   background: transparent;
   border-color: transparent;
   color: transparent;
@@ -71,14 +64,12 @@ input[type=range]::-ms-track {
 input[type=range]::-ms-fill-lower {
   background: #E1D687;
   border: 1px solid #031630;
-  border-radius: 0px;
   box-shadow: 1px 1px 1px #031630;
 }
 
 input[type=range]::-ms-fill-upper {
   background: #E1D687;
   border: 1px solid #031630;
-  border-radius: 0px;
   box-shadow: 1px 1px 1px #031630;
 }
 
@@ -88,7 +79,6 @@ input[type=range]::-ms-thumb {
   border: 1px solid #031630;
   height: 40px;
   width: 20px;
-  border-radius: 0px;
   background: #C0BD8D;
   cursor: pointer;
 }
@@ -108,63 +98,45 @@ input[type=range]:focus::-ms-fill-upper {
   color: #fff;
 }
 
-.form .formHeader {
-  text-align: center;
-  font-size: 40px;
-  text-transform: uppercase;
-  padding: 30px 0;
-}
-
-.form .fromTextHeader {
-  margin: 20px 0;
-  text-align: center;
-  font-size: 22px;
-}
-
-
-
-
 form {
   text-align: center;
 }
 
-
-
-.filtrationForm {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr;
+.SawMethod {
   color: #fff;
 }
 
-.filtrationForm .SawMethod {
-  color: #fff;
+.SawMethod h2 {
+  padding: 20px 0;
+  font-size: 38px;
+  text-transform: uppercase;
 }
 
-.filtrationForm .SawMethod h2 {
-  margin: 30px 0;
-  font-size: 32px;
+.SawMethod p {
+  margin: 40px 0;
+  font-size: 24px;
+  padding: 0 30px;
 }
 
-.filtrationForm .SawMethod p {
-  margin: 50px 0;
-}
-
-.filtrationForm .SawMethod .ratios {
+.SawMethod .ratios {
   margin-top: 50px;
   color: #fff;
 }
 
-.filtrationForm .SawMethod div {
+.SawMethod div {
   display: flex;
   align-items: center;
+  justify-content: center;
+  margin: 10px 0;
 }
 
-.filtrationForm .SawMethod div span {
+.SawMethod div span {
+
   margin: 0 10px;
 }
 
 .SubmitButton {
+  margin: 30px 0;
   background-color: #e1d687;
   color: #13253d;
   padding: 20px 30px;
@@ -177,4 +149,187 @@ form {
 
 .SubmitButton:hover {
   background-color: #fff;
+}
+
+@media (orientation: portrait) and (min-width: 320px) {
+  input[type=range]::-webkit-slider-thumb {
+    height: 20px;
+    width: 10px;
+    margin-top: -6.25px;
+  }
+
+  .SawMethod h2 {
+    padding: 30px 0 0 0;
+    font-size: 24px;
+  }
+
+  .SawMethod p {
+    font-size: 16px;
+  }
+
+  .SawMethod .ratios h4 {
+    font-size: 14px;
+  }
+
+  .SawMethod div span {
+    font-size: 12px;
+    margin: 0 10px;
+  }
+
+  .SubmitButton {
+    font-size: 18px;
+  }
+
+
+
+}
+
+@media (orientation: portrait) and (min-width: 410px) {
+  input[type=range]::-webkit-slider-thumb {
+    height: 25px;
+    width: 13px;
+    margin-top: -8.25px;
+  }
+
+  .SawMethod h2 {
+    padding: 30px 0 0 0;
+    font-size: 28px;
+  }
+
+  .SawMethod p {
+    font-size: 20px;
+  }
+
+  .SawMethod .ratios h4 {
+    font-size: 18px;
+  }
+
+  .SawMethod div span {
+    font-size: 14px;
+    margin: 0 10px;
+  }
+
+  .SubmitButton {
+    font-size: 22px;
+  }
+
+
+
+}
+
+@media (orientation: portrait) and (min-width: 768px) {
+  input[type=range]::-webkit-slider-thumb {
+    height: 40px;
+    width: 20px;
+    margin-top: -16.5px;
+  }
+
+  .SawMethod h2 {
+    padding: 50px 0 0 0;
+    font-size: 42px;
+  }
+
+  .SawMethod p {
+    font-size: 28px;
+  }
+
+  .SawMethod .ratios h4 {
+    font-size: 22px;
+  }
+
+  .SawMethod div span {
+    font-size: 18px;
+    margin: 0 10px;
+  }
+
+  .SubmitButton {
+    font-size: 32px;
+  }
+
+}
+
+@media (orientation: landscape) {
+  input[type=range]::-webkit-slider-thumb {
+    height: 25px;
+    width: 13px;
+    margin-top: -8.25px;
+  }
+
+  .SawMethod h2 {
+    padding: 30px 0 0 0;
+    font-size: 24px;
+  }
+
+  .SawMethod p {
+    font-size: 16px;
+  }
+
+  .SawMethod .ratios h4 {
+    font-size: 14px;
+  }
+
+  .SawMethod div span {
+    font-size: 12px;
+    margin: 0 10px;
+  }
+
+  .SubmitButton {
+    font-size: 18px;
+  }
+
+}
+
+@media(orientation:landscape) and (min-width:640px) {
+  .SawMethod h2 {
+    padding: 30px 0 0 0;
+    font-size: 28px;
+  }
+
+  .SawMethod p {
+    font-size: 20px;
+  }
+
+  .SawMethod .ratios h4 {
+    font-size: 18px;
+  }
+
+  .SawMethod div span {
+    font-size: 14px;
+    margin: 0 10px;
+  }
+
+  .SubmitButton {
+    font-size: 22px;
+  }
+}
+
+@media(orientation:landscape) and (min-width:1024px) {
+  input[type=range]::-webkit-slider-thumb {
+    height: 40px;
+    width: 20px;
+    margin-top: -16.5px;
+  }
+
+  .SawMethod h2 {
+    padding: 50px 0 0 0;
+    font-size: 42px;
+  }
+
+  .SawMethod p {
+    font-size: 28px;
+  }
+
+  .SawMethod .ratios h4 {
+    font-size: 22px;
+  }
+
+  .SawMethod div span {
+    font-size: 18px;
+    margin: 0 10px;
+  }
+
+  .SubmitButton {
+    font-size: 32px;
+  }
+
 }
