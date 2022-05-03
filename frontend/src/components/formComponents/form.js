@@ -40,9 +40,7 @@ const Form = () => {
         <section className="SawMethod">
           <h2>Formularz</h2>
           <p>
-            Wybierz w formularzu, co jest dla Ciebie bardzo ważne lub mniej
-            ważne, a następnie kliknij w przycisk Wyślij, za pomocą którego
-            zostaniesz przekierowany na podstronę z wynikami.
+            Wybierz w formularzu, co jest dla Ciebie bardziej lub mniej ważne a następnie kliknij Wyślij.
           </p>
           <section className="ratios">
             <h4>Procesor</h4>

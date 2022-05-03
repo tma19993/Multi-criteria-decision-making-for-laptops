@@ -19,7 +19,7 @@ class StartComponent extends Component {
         <img src={logo} alt="logo" className="logo" />
         <div className="welcome">
           <h1>Witaj</h1>
-          <p>Ta aplikcaja pomoże ci wybrać swój wymarzony laptop</p>
+          <p>Ta aplikacja pomoże ci wybrać swój wymarzony laptop</p>
         </div>
         <div className="startBTN">
           <button className="start" onClick={this.scrollToForm}>
