@@ -11,8 +11,7 @@ let gpuRatio = 0.25;
 let ramRatio = 0.2;
 let storageRatio = 0.15;
 let price_ratio = 0.1;
-// let screen_ratio:0.1,
-//let  weigthRatio:0.1,
+
 let laptopsDatabase = [];
 let ratigArray = [];
 let globalArray = [];
@@ -41,54 +40,6 @@ app.use(
 
 app.use(bodyParser.json());
 
-MongoClient.connect("mongodb://localhost:27017", (error, laptops) => {
-  if (error) {
-    console.log("Błąd połączenia z bazą danych");
-    laptops.close();
-  } else {
-    let manufacturerList = [];
-    let categoryList = [];
-    let screenSizeList = [];
-    let operationSystemList = [];
-    const database = laptops.db("Dane");
-    const lap = database.collection("laptops");
-    lap.find({}).toArray((err, laptopsData) => {
-      if (err) {
-        console.log("Błąd zapytania: " + err);
-      } else {
-        laptopsData.filter((laptop) => {
-          manufacturerList.push(laptop.Manufacturer);
-          categoryList.push(laptop.Category);
-          screenSizeList.push(laptop.Screen_Size);
-          operationSystemList.push(laptop.Operating_System);
-        });
-        manufacturerList = manufacturerList.filter(
-          (manufacturer, index, array) => array.indexOf(manufacturer) === index
-        );
-
-        categoryList = categoryList.filter(
-          (category, index, array) => array.indexOf(category) === index
-        );
-        screenSizeList = screenSizeList.filter(
-          (screenSize, index, array) => array.indexOf(screenSize) === index
-        );
-        operationSystemList = operationSystemList.filter(
-          (operationSystem, index, array) =>
-            array.indexOf(operationSystem) === index
-        );
-        laptops.close();
-        const List = {
-          manufacturerList,
-          categoryList,
-          screenSizeList,
-          operationSystemList,
-        };
-        app.get("/FilterForm", (req, res) => res.send(List));
-      }
-    });
-  }
-});
-
 app.post("/GetRatio", (req, res) => {
   cpuRatio = req.body.cpu;
   gpuRatio = req.body.gpu;
@@ -108,7 +59,7 @@ app.post("/GetRatio", (req, res) => {
       console.log("Błąd połączenia z bazą danych");
       laptops.close();
     } else {
-      console.log("Aktualizacja rankingu".green);
+      // console.log("Aktualizacja rankingu".green);
 
       const database = laptops.db("Dane");
       const lap = database.collection("laptops");
@@ -135,9 +86,32 @@ app.post("/GetRatio", (req, res) => {
             G3D_Mark = parseInt(G3D_Mark);
             Price_in_Euros = parseFloat(Price_in_Euros);
             RAM = parseInt(RAM);
-            Storage = parseInt(Storage);
 
-            //Szukanie największej wartości
+            if (Storage.indexOf("TB") === -1) {
+              if (Storage.indexOf("+") === -1) {
+                Storage = parseInt(Storage);
+              } else {
+                let beforePlus = parseInt(Storage);
+                const id = Storage.indexOf("+");
+
+                let afterPlus = parseInt(Storage.substr(id + 1, 8));
+
+                Storage = beforePlus + afterPlus;
+              }
+            } else {
+              if (Storage.indexOf("+") === -1) {
+                Storage = Storage.substr(0, 1);
+                Storage = parseInt(Storage + "000");
+              } else {
+                let beforePlus = parseInt(Storage);
+                const id = Storage.indexOf("+");
+
+                let afterPlus = parseInt(Storage.substr(id + 3, 1) + "000");
+                Storage = beforePlus + afterPlus;
+              }
+            }
+
+            //Szukanie największej wartości i najmniejszej
             if (CPU_Mark > maxCpu) {
               maxCpu = CPU_Mark;
             }
@@ -166,7 +140,29 @@ app.post("/GetRatio", (req, res) => {
             G3D_Mark = parseInt(G3D_Mark);
             Price_in_Euros = parseFloat(Price_in_Euros);
             RAM = parseInt(RAM);
-            Storage = parseInt(Storage);
+            if (Storage.indexOf("TB") === -1) {
+              if (Storage.indexOf("+") === -1) {
+                Storage = parseInt(Storage);
+              } else {
+                let beforePlus = parseInt(Storage);
+                const id = Storage.indexOf("+");
+
+                let afterPlus = parseInt(Storage.substr(id + 1, 8));
+
+                Storage = beforePlus + afterPlus;
+              }
+            } else {
+              if (Storage.indexOf("+") === -1) {
+                Storage = Storage.substr(0, 1);
+                Storage = parseInt(Storage + "000");
+              } else {
+                let beforePlus = parseInt(Storage);
+                const id = Storage.indexOf("+");
+
+                let afterPlus = parseInt(Storage.substr(id + 3, 1) + "000");
+                Storage = beforePlus + afterPlus;
+              }
+            }
 
             //działania
             const cpuRating = (CPU_Mark / maxCpu) * cpuRatio;
