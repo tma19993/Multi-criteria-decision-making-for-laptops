@@ -4,7 +4,7 @@ import logo from "../../pictures/logo.png";
 class StartComponent extends Component {
   scrollToForm = (e) => {
     e.preventDefault();
-    const scrollLeft = window.pageXOffset;
+    const scrollLeft = window.pageXOffset + 10;
     let formPositionTop = document.getElementById("formId").offsetTop;
     window.scroll({
       top: formPositionTop,

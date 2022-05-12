@@ -6,11 +6,11 @@ const bodyParser = require("body-parser");
 
 const port = 5000;
 
-let cpuRatio = 0.3;
-let gpuRatio = 0.25;
-let ramRatio = 0.2;
-let storageRatio = 0.15;
-let price_ratio = 0.1;
+let cpuRatio = 0;
+let gpuRatio = 0;
+let ramRatio = 0;
+let storageRatio = 0;
+let price_ratio = 0;
 
 let laptopsDatabase = [];
 let ratigArray = [];
@@ -250,7 +250,7 @@ app.post("/GetRatio", (req, res) => {
   });
 });
 
-app.get("/", (req, res) => res.send("Hello world"));
+// app.get("/", (req, res) => res.send("Hello world"));
 app.get("/GlobalArray", (req, res) => res.send(globalArray));
 //komunikaty na końcu
 app.listen(port, () => {
