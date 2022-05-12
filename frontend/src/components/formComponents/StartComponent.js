@@ -4,7 +4,7 @@ import logo from "../../pictures/logo.png";
 class StartComponent extends Component {
   scrollToForm = (e) => {
     e.preventDefault();
-    const scrollLeft = window.pageXOffset;
+    const scrollLeft = window.pageXOffset + 10;
     let formPositionTop = document.getElementById("formId").offsetTop;
     window.scroll({
       top: formPositionTop,
@@ -19,7 +19,7 @@ class StartComponent extends Component {
         <img src={logo} alt="logo" className="logo" />
         <div className="welcome">
           <h1>Witaj</h1>
-          <p>Ta aplikcaja pomoże ci wybrać swój wymarzony laptop</p>
+          <p>Ta aplikacja pomoże ci wybrać swój wymarzony laptop</p>
         </div>
         <div className="startBTN">
           <button className="start" onClick={this.scrollToForm}>

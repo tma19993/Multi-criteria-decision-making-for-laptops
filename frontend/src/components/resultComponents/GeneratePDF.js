@@ -56,7 +56,7 @@ const GeneratePDF = (props) => {
     return (
       <section className="pdfObject">
         <Link to="/" className="backToStart">
-          Wróć do formularza
+          Wróć
         </Link>
         <button onClick={pdfGenerate} className="pdf">
           Pobierz wyniki w pdf
